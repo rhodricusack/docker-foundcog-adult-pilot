@@ -1,0 +1,5 @@
+volumes:
+  - $HOME/.aws/credentials:/home/vscode/.aws/credentials:ro  
+
+
+  

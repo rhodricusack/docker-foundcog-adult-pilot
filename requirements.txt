@@ -1,0 +1,7 @@
+boto3
+nilearn
+nibabel
+numpy
+matplotlib
+msgpack
+msgpack_numpy
