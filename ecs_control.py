@@ -12,7 +12,7 @@ def register_task(client):
         containerDefinitions=[
             {
                 'name': 'roi-extract',
-                'image': "807820536621.dkr.ecr.eu-west-1.amazonaws.com/roi-extract:latest",
+                'image': "807820536621.dkr.ecr.eu-west-1.amazonaws.com/fmriprep-cusacklab:latest",
                 'essential': True,
                 'command': [
                     'echo testing',
@@ -20,25 +20,25 @@ def register_task(client):
                 'logConfiguration': {
                     'logDriver': 'awslogs',
                     'options': {
-                        "awslogs-group": "/ecs/roi-extract",
+                        "awslogs-group": "/ecs/fmriprep-cusacklab",
                         "awslogs-region": "eu-west-1",
                         "awslogs-stream-prefix": "ecs"
                     },
                 },
-                'secrets': [
-                    {
-                        "valueFrom": "arn:aws:secretsmanager:eu-west-1:807820536621:secret:aws/hcp-B9P9EV",
-                        "name": "HCP_KEYS"
-                    }
-                ]
+                # 'secrets': [
+                #     {
+                #         "valueFrom": "arn:aws:secretsmanager:eu-west-1:807820536621:secret:aws/hcp-B9P9EV",
+                #         "name": "HCP_KEYS"
+                #     }
+                # ]
             },
         ],
         requiresCompatibilities=[
             'FARGATE',
         ],
         
-        cpu='1024',
-        memory='4096',
+        cpu='8192',
+        memory='8192',
         
         tags=[
             {
@@ -69,7 +69,7 @@ def run_task(client=None, command=None):
         overrides={
             'containerOverrides': [
                 {
-                    'name': 'roi-extract',
+                    'name': 'fmriprep-cusacklab',
                     'command': command
                    
 

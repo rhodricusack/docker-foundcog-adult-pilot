@@ -13,7 +13,6 @@
 			"NODE_VERSION": "lts/*"
 		}
 	},
-
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
@@ -46,7 +45,7 @@
 	"remoteUser": "vscode",
 
 	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}\\.aws\\credentials,target=/home/vscode/.aws/credentials,type=bind,consistency=cached",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}\\.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}\\rois,target=/workspaces/docker-fsl/rois,type=bind,consistency=cached"
 
 	]

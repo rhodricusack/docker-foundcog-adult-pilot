@@ -5,3 +5,4 @@ numpy
 matplotlib
 msgpack
 msgpack_numpy
+fmriprep

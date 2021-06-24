@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["--subject", "178950", "--profile_name","hcp", "--output_prefix","chiara_test"]
+            "args": ["--subject", "01", "--session", "001"]
         }
     ]
 }
