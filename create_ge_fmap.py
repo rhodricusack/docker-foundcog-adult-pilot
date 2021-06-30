@@ -1,3 +1,7 @@
+# We didn't acquire SE EPIs for our LR and RL phase-encoding polarity disortion correction
+# So, using the mean of GE fMRI as stand-in
+# Rhodri Cusack TCIN 2021-06, cusackrh@tcd.ie
+
 import nibabel as nib
 import boto3
 import tempfile

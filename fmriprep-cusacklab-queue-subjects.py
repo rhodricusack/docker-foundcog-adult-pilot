@@ -1,3 +1,8 @@
+'''
+Using aws fargate to run a fmriprep. Uses our own docker image, which contains a wrapper to download the data from S3 and push it back again.
+Rhodri Cusack TCIN 2021-06, cusackrh@tcd.ie
+'''
+
 from ecs_control import register_task, run_task, wait_for_completion
 import boto3
 import msgpack
