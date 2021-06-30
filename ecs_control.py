@@ -6,12 +6,12 @@ def register_task(client):
 
     response = client.register_task_definition(
         executionRoleArn='arn:aws:iam::807820536621:role/ecsTaskExecutionRole',
-        family='roi-extract',
+        family='fmriprep-cusacklab',
         taskRoleArn='arn:aws:iam::807820536621:role/cusacklab_elasticcontainer_service_task',
         networkMode='awsvpc',
         containerDefinitions=[
             {
-                'name': 'roi-extract',
+                'name': 'fmriprep-cusacklab',
                 'image': "807820536621.dkr.ecr.eu-west-1.amazonaws.com/fmriprep-cusacklab:latest",
                 'essential': True,
                 'command': [
@@ -37,8 +37,8 @@ def register_task(client):
             'FARGATE',
         ],
         
-        cpu='8192',
-        memory='8192',
+        cpu='4096',
+        memory='30GB',
         
         tags=[
             {
@@ -70,13 +70,12 @@ def run_task(client=None, command=None):
             'containerOverrides': [
                 {
                     'name': 'fmriprep-cusacklab',
-                    'command': command
-                   
-
+                    'command': command,
                 },
             ],
             'executionRoleArn': 'arn:aws:iam::807820536621:role/ecsTaskExecutionRole',
-            'taskRoleArn': 'arn:aws:iam::807820536621:role/cusacklab_elasticcontainer_service_task'
+            'taskRoleArn': 'arn:aws:iam::807820536621:role/cusacklab_elasticcontainer_service_task',
+            'ephemeralStorage': {'sizeInGiB': 128},
         },
         platformVersion='LATEST',
         startedBy='neurana-python',
@@ -90,7 +89,7 @@ def run_task(client=None, command=None):
                 'value': 'cusacklab'
             },
         ],
-        taskDefinition='roi-extract'
+        taskDefinition='fmriprep-cusacklab'
     )
     return response
 
