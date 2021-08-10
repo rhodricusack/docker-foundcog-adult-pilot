@@ -13,7 +13,8 @@ from os import path
 def run_subjects(subjlist, input_bucket, do_wait=True):   
     response=[]
     for subj in subjlist:
-        response.append(run_task(client, command = ['/usr/local/miniconda/bin/fmriprep-cusacklab.bash', input_bucket, subj, 'bids', 'deriv-2_topup']))
+        response.append(run_task(client, command = ['/usr/local/miniconda/bin/fmriprep-cusacklab.bash', input_bucket, subj, 'foundcog-adult-pilot-2/bids', 'foundcog-adult-pilot-2/deriv-2_topup']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
+        #response.append(run_task(client, command = ['C:\\Users\\Anna\\Documenti\\Research\\Projects\\ONGOING\\Project_FOUNDCOG\\fmriprep\\fmriprep-cusacklab.bash', input_bucket, subj, 'foundcog-adult-pilot-2/bids', 'foundcog-adult-pilot-2/deriv-2_topup']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
     
     if do_wait:
         wait_for_completion(client, response)
@@ -27,6 +28,7 @@ if __name__=='__main__':
     client = session.client('ecs', region_name='eu-west-1')
     response = register_task(client) 
     print(response)
-    subjlist = ['sub-06','sub-17','sub-03'] # subjects with small affine shifts between fMRI runs
-    #subjlist =['sub-04','sub-02','sub-05','sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14','sub-15','sub-16']
+    #subjlist = ['sub-06','sub-17','sub-03'] # subjects with small affine shifts between fMRI runs
+    #subjlist =['sub-02','sub-03','sub-04','sub-05', 'sub-06', 'sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13']
+    subjlist =['sub-02']
     response = run_subjects(subjlist, input_bucket=input_bucket)
