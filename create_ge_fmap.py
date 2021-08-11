@@ -21,9 +21,10 @@ tmpdir = tempfile.mkdtemp()
 #s3.download_file(bucket, 'bids/participants.tsv', path.join(tmpdir,'participants.tsv') )
 #ps = pd.read_csv( path.join(tmpdir,'participants.tsv'), sep='\t')
 
-#ps =['sub-04','sub-02','sub-05','sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14','sub-15','sub-16']
+ps = ['sub-02']
+#ps =['sub-02','sub-03', 'sub-04','sub-05', 'sub-06','sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14']
 # Removed because images don't match
-ps = ['sub-06','sub-17','sub-03']
+#ps = ['sub-06','sub-17','sub-03']
 
 create_means = True
 create_jsons = True
@@ -36,11 +37,13 @@ for p in ps:
 for p in ps:
 
     print(f'Working on {p}')
-    resp = s3.list_objects_v2(Bucket=bucket, Prefix=f'bids/{p}/ses')
-    sespth=resp['Contents'][0]['Key'].split('/')[:3]
+    resp = s3.list_objects_v2(Bucket=bucket, Prefix=f'foundcog-adult-pilot-2/bids/{p}/ses')
+    #print(resp)
+    sespth=resp['Contents'][0]['Key'].split('/')[:4]
 
     pmean = path.join('/'.join(sespth),'fmap')
     fmapresp = s3.list_objects_v2(Bucket=bucket, Prefix=pmean)
+    print(pmean)
     if fmapresp['KeyCount'] and skip_if_already_fmap:
         print(f'Already have fmap in {p}')
     else:
@@ -52,6 +55,7 @@ for p in ps:
         pe = {}
         mnpths = {}
 
+        #print(funcresp.keys())
         for bold in funcresp['Contents']:
             filename, ext=path.splitext(bold['Key'])
             if ext=='.gz':
@@ -103,7 +107,10 @@ for p in ps:
                 totimg = image.concat_imgs(np.array(allimgs)[urows[1]==commonrow])
                 mnimg = image.mean_img(totimg)
                 nib.save(mnimg,path.join(tmpdir,pmean+ '.nii.gz'))
-                s3.upload_file(path.join(tmpdir,pmean+ '.nii.gz'), bucket, pmean+ '.nii.gz')    
+                print(pmean+ '.nii.gz')  
+                #s3.upload_file(path.join(tmpdir,pmean+ '.nii.gz'), bucket, pmean+ '.nii.gz')
+                s3.upload_file(path.join(tmpdir,pmean+ '.nii.gz'), bucket, pmean+ '.nii.gz')
+                
 
             # Make the json file, taking as input the first of the matching BOLD files and adding the intended for field
             if create_jsons:

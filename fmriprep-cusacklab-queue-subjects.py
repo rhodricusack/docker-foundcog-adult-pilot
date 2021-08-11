@@ -14,7 +14,6 @@ def run_subjects(subjlist, input_bucket, do_wait=True):
     response=[]
     for subj in subjlist:
         response.append(run_task(client, command = ['/usr/local/miniconda/bin/fmriprep-cusacklab.bash', input_bucket, subj, 'foundcog-adult-pilot-2/bids', 'foundcog-adult-pilot-2/deriv-2_topup']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
-        #response.append(run_task(client, command = ['C:\\Users\\Anna\\Documenti\\Research\\Projects\\ONGOING\\Project_FOUNDCOG\\fmriprep\\fmriprep-cusacklab.bash', input_bucket, subj, 'foundcog-adult-pilot-2/bids', 'foundcog-adult-pilot-2/deriv-2_topup']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
     
     if do_wait:
         wait_for_completion(client, response)
