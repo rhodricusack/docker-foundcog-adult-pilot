@@ -21,8 +21,8 @@ tmpdir = tempfile.mkdtemp()
 #s3.download_file(bucket, 'bids/participants.tsv', path.join(tmpdir,'participants.tsv') )
 #ps = pd.read_csv( path.join(tmpdir,'participants.tsv'), sep='\t')
 
-ps = ['sub-02']
-#ps =['sub-02','sub-03', 'sub-04','sub-05', 'sub-06','sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14']
+
+ps =['sub-15', 'sub-16', 'sub-17', 'sub-18']
 # Removed because images don't match
 #ps = ['sub-06','sub-17','sub-03']
 
@@ -116,7 +116,7 @@ for p in ps:
             if create_jsons:
                 with open(path.join(tmpdir,pelist[0]+'.json')) as json_file:
                     data = json.load(json_file)
-                    data['IntendedFor'] = ['/'.join(x.split('/')[2:])+'.nii.gz' for y in pe.values() for x in y]
+                    data['IntendedFor'] = ['/'.join(x.split('/')[3:])+'.nii.gz' for y in pe.values() for x in y]
                 with open(path.join(tmpdir, pmean + '.json'),'w') as json_out:
                     json.dump(data, json_out)
                 s3.upload_file(path.join(tmpdir, pmean + '.json'), bucket, pmean+ '.json')    
