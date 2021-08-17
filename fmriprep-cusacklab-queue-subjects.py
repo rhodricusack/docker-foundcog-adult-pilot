@@ -28,6 +28,6 @@ if __name__=='__main__':
     response = register_task(client) 
     print(response)
     #subjlist = ['sub-06','sub-17','sub-03'] # subjects with small affine shifts between fMRI runs
-    subjlist =['sub-02','sub-03','sub-04','sub-05', 'sub-06', 'sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14']
+    subjlist =['sub-15','sub-16','sub-17','sub-18']
     #subjlist =['sub-03']
     response = run_subjects(subjlist, input_bucket=input_bucket)
