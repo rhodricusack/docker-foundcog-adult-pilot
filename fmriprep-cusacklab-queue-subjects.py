@@ -13,7 +13,7 @@ from os import path
 def run_subjects(subjlist, input_bucket, do_wait=True):   
     response=[]
     for subj in subjlist:
-        response.append(run_task(client, command = ['/usr/local/miniconda/bin/fmriprep-cusacklab.bash', input_bucket, subj, 'int_imaging_bids', 'deriv']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
+        response.append(run_task(client, command = ['./fmriprep-cusacklab.bash', input_bucket, subj, 'int_imaging_bids', 'int_imaging_derivs']))  ### CHANGE PATH TO FMRIPROP-CUSACKLAB.  TO DO: INSTALL?
     
     if do_wait:
         wait_for_completion(client, response)
@@ -28,6 +28,6 @@ if __name__=='__main__':
     response = register_task(client) 
     print(response)
     
-    subjlist =['sub-1','sub-2','sub-5','sub-7','sub-8','sub-9','sub-10','sub-11']
+    subjlist =['sub-5','sub-7','sub-8','sub-9','sub-10','sub-11']
 
     response = run_subjects(subjlist, input_bucket=input_bucket)
