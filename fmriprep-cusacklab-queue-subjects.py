@@ -28,6 +28,6 @@ if __name__=='__main__':
     response = register_task(client) 
     print(response)
     
-    subjlist =['sub-1','sub-2']
+    subjlist =['sub-1','sub-2','sub-5','sub-7','sub-8','sub-9','sub-10','sub-11']
 
     response = run_subjects(subjlist, input_bucket=input_bucket)
