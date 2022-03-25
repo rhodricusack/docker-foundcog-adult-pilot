@@ -13,7 +13,7 @@ from os import path
 def run_subjects(subjlist, input_bucket, do_wait=True):   
     response=[]
     for subj in subjlist:
-        response.append(run_task(client, command = ['/usr/local/miniconda/bin/fmriprep-cusacklab.bash', input_bucket, subj, 'bids', 'deriv-2_topup']))
+        response.append(run_task(client, command = ['./fmriprep-cusacklab.bash', input_bucket, subj, 'int_imaging_bids', 'int_imaging_derivs']))
     
     if do_wait:
         wait_for_completion(client, response)
@@ -22,11 +22,12 @@ def run_subjects(subjlist, input_bucket, do_wait=True):
     
 
 if __name__=='__main__':
-    input_bucket='foundcog-adult-pilot'
+    input_bucket='movie-associations'
     session = boto3.session.Session()
     client = session.client('ecs', region_name='eu-west-1')
     response = register_task(client) 
     print(response)
-    subjlist = ['sub-06','sub-17','sub-03'] # subjects with small affine shifts between fMRI runs
-    #subjlist =['sub-04','sub-02','sub-05','sub-07','sub-08','sub-09','sub-10','sub-11','sub-12','sub-13','sub-14','sub-15','sub-16']
+    
+    subjlist =['sub-5','sub-7','sub-8','sub-9','sub-10','sub-11']
+
     response = run_subjects(subjlist, input_bucket=input_bucket)
