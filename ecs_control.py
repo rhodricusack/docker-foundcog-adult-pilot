@@ -43,7 +43,7 @@ def register_task(client):
         tags=[
             {
                 'key': 'PrimaryUser',
-                'value': 'clionaodoherty'
+                'value': 'clionaodoherty' # put your username in here!
             },
             {
                 'key': 'SystemComponent',
